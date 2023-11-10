@@ -1,4 +1,4 @@
-<%@ page import="GameServlet" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -10,15 +10,23 @@
 </head>
 <body>
 <div id="container">
-    <div><h3>${question}</h3></div>
+    <%String question = (String) request.getAttribute("question");
+     List<String> answers = (List<String>) request.getAttribute("answers");
+    %>
+
+    <div><h3><%=session.getAttribute("userName")%></h3></div>
+    <div><h3><%=question%></h3></div>
 
     <div>
-        <form method="post" action="${pageContext.request.contextPath}/game">
-            <c:forEach var="answer" items="${answers}">
-                <input type="radio" name="answer" value="${answer}">
-                <label>${answer}</label>
+        <form method="post" action="/game">
+                <%
+                    for (String answer: answers) {
+                %>
+                <input type="radio" name="answer" value="<%=answer%>">
+                <label><%=answer%></label>
                 <br>
-            </c:forEach>
+                <%}%>
+
             <br>
             <input type="submit" value="Дальше">
         </form>

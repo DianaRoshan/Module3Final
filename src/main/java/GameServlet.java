@@ -79,14 +79,16 @@ public class GameServlet extends HttpServlet {
         return answers.get(index);
     }
 
-    public static boolean getWinValue() {
-        return win;
-    }
 
     public static void winOrLose(HttpServletRequest req, HttpServletResponse resp, boolean isWin) throws ServletException, IOException {
         win = isWin;
         req.getSession().invalidate();
         questionNumber = 0;
-        req.getRequestDispatcher("/finish.jsp").forward(req, resp);
+
+        if(isWin){
+            req.getRequestDispatcher("/win.jsp").forward(req, resp);
+        } else{
+            req.getRequestDispatcher("/lose.jsp").forward(req, resp);
+        }
     }
 }
