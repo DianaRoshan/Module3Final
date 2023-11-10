@@ -17,6 +17,9 @@ public class GameServlet extends HttpServlet {
                                                               List.of("Подняться на мостик", "Отказаться подниматься на мостик"),
                                                               List.of("Рассказать правду о себе", "Солгать о себе"));
     private static boolean win;
+
+
+
     private static int questionNumber = 0;
 
 
@@ -58,7 +61,9 @@ public class GameServlet extends HttpServlet {
         }
 
     }
-
+    public static void setQuestionNumber(int questionNumber) {
+        GameServlet.questionNumber = questionNumber;
+    }
     private boolean checkAnswer(int questionNumber, int answerNumber) {
         switch (questionNumber){
             case 0,1,2 ->{
